@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,14 +11,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import beans.Question;
 import beans.User;
-
+import bo.QuestionBo;
 @WebServlet("/consultant_home")
 public class ConsultantHomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+    QuestionBo qb;
     public ConsultantHomeServlet() {
         super();
+        qb = new QuestionBo();
+        
 
     }
 
@@ -31,8 +35,10 @@ public class ConsultantHomeServlet extends HttpServlet {
 			return;
 		}
 		else if(u.getRole()==1) {
+			List<Question> penlist = qb.getPendingQuestions();
 			destination = "/WEB-INF/view/consultantHome.jsp";
 			request.setAttribute("user", u);
+			request.setAttribute("allPen",penlist);
 			RequestDispatcher rd = getServletContext().getRequestDispatcher(destination);
 			rd.forward(request, response);
 		}

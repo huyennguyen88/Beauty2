@@ -54,8 +54,63 @@ body, html {
     <i class="fab fa-youtube w3-hover-opacity"></i>
   </div>
 </header>
-<h1>Hello Consultant "${user.name}" !</h1>
-<h2>List question here:</h2>
+<p class="h2 text-danger text-center my-3">Câu hỏi chưa giải đáp:</p>
+<div class="container">
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Tiêu đề</th>
+      <th scope="col">Nội dung</th>
+      <th scope="col">Trả lời</th>
+    </tr>
+  </thead>
+  <tbody>
+   <c:set var="count" value="0" scope="page" />
+   <c:forEach items="${allPen}" var="question">
+	<c:set var="count" value="${count + 1}" scope="page"/>
+    <tr>
+      <th scope="row"><c:out value="${count}"></c:out> </th>
+      <td>${question.title}</td>
+      <td>${question.content}</td>
+      <td>
+      	<button type="button" type="button" class="btn btn-success" data-toggle="modal" data-target="#ansform">Answer</button>
+      </td>
+    </tr>   		
+   </c:forEach>
+
+  </tbody>
+</table>
+</div>
+  <div>
+       <div class="modal fade" id="ansform" tabIndex={-1} role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
+           <div class="modal-dialog modal-dialog-centered" role="document">
+               <div class="modal-content">
+                   <div class="modal-header">
+                       <h5 class="modal-title text-danger" id="exampleModalLabel">Trả lời câu hỏi</h5>
+                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                           <span aria-hidden="true">×</span>
+                       </button>
+                   </div>
+                   <div class="modal-body">
+                       <form action="<%=request.getContextPath()%>/ansform" method="POST">
+                           <div class="form-group">
+                               <label  class="text-danger">Tiêu đề  </label>
+                               <input name="title" type="text" class="form-control" placeholder="Tiêu đề là..."  />
+                           </div>  
+                        
+                           <div class="form-group">
+                               <label>Trả lời</label>
+                               <textarea class="form-control"  rows="3" name="content"></textarea>
+                           </div>
+                       	   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                           <input  type="submit" class="btn btn-danger" value="Submit"/>
+                       </form>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </div>
 <jsp:include page="_footer.jsp"></jsp:include>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

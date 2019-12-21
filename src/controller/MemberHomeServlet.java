@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,13 +12,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.User;
+import beans.Question;
+import beans.QuestionWAnswer;
+import dao.QuestionWAnswerDao;
+
 
 @WebServlet("/member_home")
 public class MemberHomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+    QuestionWAnswerDao qd;
     public MemberHomeServlet() {
         super();
+        qd = new QuestionWAnswerDao();
 
     }
 
@@ -32,8 +38,13 @@ public class MemberHomeServlet extends HttpServlet {
 			return;
 		}
 		else if(u.getRole()==0) {
+			List<Question> penlist = qd.getMyPendingQuestion(u.getUser_id());
+			List<QuestionWAnswer> donelist = qd.getMyDoneQuestion(u.getUser_id());
 			destination = "/WEB-INF/view/memberHome.jsp";
 			request.setAttribute("user", u);
+			request.setAttribute("penList", penlist);
+			request.setAttribute("doneList", donelist);
+			
 			RequestDispatcher rd = getServletContext().getRequestDispatcher(destination);
 			rd.forward(request, response);
 		}

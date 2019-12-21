@@ -1,9 +1,17 @@
 package bo;
 
-public class QuestionBo {
+import java.util.List;
 
-	public QuestionBo() {
-		// TODO Auto-generated constructor stub
+import beans.Question;
+import dao.QuestionDao;
+public class QuestionBo {
+	public QuestionDao dao;
+	public QuestionBo(){
+		dao = new QuestionDao();
 	}
+	public List<Question> getPendingQuestions(){
+		return dao.getPendingQuestions();
+	}
+
 
 }

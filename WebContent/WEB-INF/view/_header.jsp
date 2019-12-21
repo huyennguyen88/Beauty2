@@ -9,14 +9,13 @@
     <!-- Right-sided navbar links -->
     <div class="w3-right w3-hide-small">
       <a href="${pageContext.request.contextPath}/home"class="w3-bar-item w3-button">TRANG CHỦ</a>
-      <a href= "${pageContext.request.contextPath}/askform" class="w3-bar-item w3-button">HỎI ĐÁP</a>
       <a href="#about" class="w3-bar-item w3-button">GIỚI THIỆU</a>
       <c:choose>
       	<c:when test="${not empty user }">
-      		<button class="w3-bar-item w3-button"  >Đăng xuất</button>
+      		<a class="w3-bar-item w3-button" href="${pageContext.request.contextPath}/logout" >ĐĂNG XUẤT</a>
       	</c:when>
       	<c:otherwise>
-      		<button class="w3-bar-item w3-button" data-toggle="modal" data-target="#loginModal" >Đăng nhập</button>
+      		<a class="w3-bar-item w3-button" data-toggle="modal" data-target="#loginModal" >ĐĂNG NHẬP</a>
       	</c:otherwise>
       </c:choose>
       

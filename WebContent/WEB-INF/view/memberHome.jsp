@@ -37,7 +37,7 @@ body, html {
 <!-- Header with full-height image -->
 <header class="bgimg-1 w3-display-container " id="home">
   <div class="w3-display-left w3-text-dark-grey" style="padding:48px">
-    <span class="w3-jumbo w3-hide-small">My Actibity</span><br>
+    <span class="w3-jumbo w3-hide-small">My Activity</span><br>
     <span class="w3-xxlarge w3-hide-large w3-hide-medium">Start something that matters</span><br>
     <span class="w3-large">Stop wasting valuable time with projects that just isn't you.</span>
   </div> 
@@ -48,8 +48,40 @@ body, html {
     <i class="fab fa-youtube w3-hover-opacity"></i>
   </div>
 </header>
-<h1>Hello Member "${user.name}" !</h1>
-<h2>List question here:</h2>
+<p class="h2 text-center text-danger mt-4">Câu hỏi của tôi</p>
+<div class= "container">
+	<p class="h3 text-warning">Câu hỏi đã được trả lời</p>
+	<ul class="list-unstyled">
+		<c:forEach items="${doneList}" var="a">
+		<li class="media border-bottom border-secondary my-3">
+			<div class="media-body">
+				<p class="h5 text-success">Hỏi:</hp>
+				<span>${a.title}</span>
+				<p>${a.question_content}</p>
+				<p class="h5 text-info">Trả lời:<p>
+				<p>${a.answer_content}</p>
+			</div>
+			
+		</li>
+	 	</c:forEach>
+	</ul>
+	
+	<p class="h3 text-warning mt-4">Câu hỏi chưa được trả lời</p>
+	<ul class="list-unstyled">
+		<c:forEach items="${penList}" var="a">
+		<li class="media">
+			<div class="media-body">
+				<p class="h5 text-success">Hỏi:</hp>
+				<span>${a.title}</span>
+				<p>${a.content}</p>
+			</div>
+			
+		</li>
+	 	</c:forEach>
+	</ul>
+
+</div>
+
 <jsp:include page="_footer.jsp"></jsp:include>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
