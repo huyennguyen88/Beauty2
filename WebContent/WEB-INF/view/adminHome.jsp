@@ -46,7 +46,7 @@ body, html {
 <!-- Header with full-height image -->
 <header class="bgimg-1 w3-display-container " id="home">
   <div class="w3-display-left w3-text-dark-grey" style="padding:48px">
-    <span class="w3-jumbo w3-hide-small">Answer question</span><br>
+    <span class="w3-jumbo w3-hide-small">Management</span><br>
     <span class="w3-xxlarge w3-hide-large w3-hide-medium">Start something that matters</span><br>
     <span class="w3-large">Stop wasting valuable time with projects that just isn't you.</span>
   </div> 
@@ -57,72 +57,21 @@ body, html {
     <i class="fab fa-youtube w3-hover-opacity"></i>
   </div>
 </header>
-<p class="h2 text-danger text-center mt-4">Câu hỏi cần giải đáp:</p>
-<div class="container">
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Tiêu đề</th>
-      <th scope="col">Ngày gửi</th>
-      <th scope="col">Nội dung</th>
-      <th scope="col">Trả lời</th>
-    </tr>
-  </thead>
-  <tbody>
-   <c:set var="count" value="0" scope="page" />
-   <c:forEach items="${allPen}" var="question">
-	<c:set var="count" value="${count + 1}" scope="page"/>
-    <tr  >
-      <th scope="row"><c:out value="${count}"></c:out> </th>
-      <td style="display:none;" >${question.question_id}</td>
-      <td >${question.title}</td>
-      <td style="pading: 0 30px;"><fmt:formatDate type="date" dateStyle="short"  value="${question.created_at}"/></td>
-      <td>${question.content}</td>
-      
-      <td>
-      	<button onclick="getQuestion(${question.question_id})"  type="button" class="btn btn-success" data-toggle="modal" data-target="#ansform">Answer</button>
-      </td>
-    </tr>   		
-   </c:forEach>
+<p class="h2 text-danger text-center mt-4">Các tác vụ</p>
+  <div class="container">
+  	<div class="row bg-muted">
+		<div class ="col ">
+			<a class="text-center" href="${pageContext.request.contextPath}/manageUser">
+				<p> <i class="fas fa-users fa-7x"></i></p>
+				<p class="h2 text-info">Quản lý người dùng</p>
+			</a>
+		</div>
 
-  </tbody>
-</table>
-</div>
-  <div>
-       <div class="modal fade" id="ansform" tabIndex={-1} role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
-           <div class="modal-dialog modal-dialog-centered" role="document">
-               <div class="modal-content">
-                   <div class="modal-header">
-                       <h5 class="modal-title text-danger" id="exampleModalLabel">Trả lời câu hỏi</h5>
-                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                           <span aria-hidden="true">×</span>
-                       </button>
-                   </div>
-                   <div class="modal-body">
-                       <form action="<%=request.getContextPath()%>/ansform" method="POST">
-                       	   <input style="display:none;" id="question_id" name="question_id">
-                           <div class="form-group">
-                               <label>Trả lời</label>
-                               <textarea class="form-control"  rows="3" name="content" ></textarea>
-                           </div>
-                       	   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                           <input  type="submit" class="btn btn-danger" value="Submit"/>
-                       </form>
-                   </div>
-               </div>
-           </div>
-       </div>
-   </div>
+  	</div>
+  </div>
  <div class="w3-container" style="padding:100px 16px" >
 </div> 
 <jsp:include page="_footer.jsp"></jsp:include>
-<script >
-	function getQuestion(i){
-		var inputQueId = document.getElementById("question_id");
-		inputQueId.value = i;
-	}
-</script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>

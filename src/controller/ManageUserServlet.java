@@ -12,21 +12,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.User;
-import bo.QuestionWAnswerBo;
-import beans.Question;
-import beans.QuestionWAnswer;
-import dao.QuestionWAnswerDao;
-
-
-@WebServlet("/member_home")
-public class MemberHomeServlet extends HttpServlet {
+import bo.UserBo;
+@WebServlet("/manageUser")
+public class ManageUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    QuestionWAnswerBo qd;
-    public MemberHomeServlet() {
+    UserBo ub;
+    public ManageUserServlet() {
         super();
-        qd = new QuestionWAnswerBo();
-
+        ub = new UserBo();
+      
     }
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession ses = request.getSession();
@@ -36,19 +32,16 @@ public class MemberHomeServlet extends HttpServlet {
 			response.sendRedirect(this.getServletContext().getContextPath()+"/home");
 			return;
 		}
-		else if(u.getRole()==0) {
-			List<Question> penlist = qd.getMyPendingQuestion(u.getUser_id());
-			List<QuestionWAnswer> donelist = qd.getMyDoneQuestion(u.getUser_id());
-			destination = "/WEB-INF/view/memberHome.jsp";
-			request.setAttribute("user", u);
-			request.setAttribute("penList", penlist);
-			request.setAttribute("doneList", donelist);
-			
+		else if(u.getRole()==3) {
+			List<User> userList = ub.getAll();
+			request.setAttribute("userList",userList);
+			destination = "/WEB-INF/view/manageUser.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(destination);
 			rd.forward(request, response);
 		}
-
 	}
+
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		doGet(request, response);

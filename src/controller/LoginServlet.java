@@ -38,7 +38,7 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		  
+		 
 		String password = request.getParameter("password");
 		String email = request.getParameter("email");
 		User u= checkloginBo.checkUserLogin(email, password) ;
@@ -53,6 +53,11 @@ public class LoginServlet extends HttpServlet {
 			if(u.getRole()==1)
 			{
 				destination = "/consultant_home";
+				RequestDispatcher rd = request.getRequestDispatcher(destination);
+				rd.forward(request, response);
+			}
+			else if(u.getRole()==3) {
+				destination = "/admin_home";
 				RequestDispatcher rd = request.getRequestDispatcher(destination);
 				rd.forward(request, response);
 			}

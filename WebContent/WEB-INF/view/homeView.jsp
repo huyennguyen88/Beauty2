@@ -15,7 +15,9 @@
 
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Fira Sans", sans-serif}
-
+a:hover {
+  text-decoration: none;
+}
 body, html {
   height: 100%;
   line-height: 1.8;

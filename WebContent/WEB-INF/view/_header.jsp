@@ -18,7 +18,12 @@
       				<a class="w3-bar-item w3-button" href="${pageContext.request.contextPath}/consultant_home" >CÂU HỎI</a>
       			</c:when>
       			<c:otherwise>
-      				<a class="w3-bar-item w3-button" href="${pageContext.request.contextPath}/member_home" >HOẠT ĐỘNG</a>
+      			    <c:if test="${user.getRole()==3}">
+      			    	<a class="w3-bar-item w3-button" href="${pageContext.request.contextPath}/admin_home" >QUẢN LÝ</a>
+      			    </c:if>
+      			    <c:if test="${user.getRole()==0}">
+      			    	<a class="w3-bar-item w3-button" href="${pageContext.request.contextPath}/member_home" >HOẠT ĐỘNG</a>
+      			    </c:if>
       			</c:otherwise>
       		</c:choose>
       		<a class="w3-bar-item w3-button" href="${pageContext.request.contextPath}/logout" >ĐĂNG XUẤT</a>
