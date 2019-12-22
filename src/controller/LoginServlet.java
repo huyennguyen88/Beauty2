@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -42,7 +43,7 @@ public class LoginServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		User u= checkloginBo.checkUserLogin(email, password) ;
 		String destination =null;
-		
+
 		
 		
 		if( u!=null) {
@@ -52,18 +53,19 @@ public class LoginServlet extends HttpServlet {
 			if(u.getRole()==1)
 			{
 				destination = "/consultant_home";
-				RequestDispatcher rd = getServletContext().getRequestDispatcher(destination);
+				RequestDispatcher rd = request.getRequestDispatcher(destination);
 				rd.forward(request, response);
 			}
 			else {
-				destination = "/member_home";
-				RequestDispatcher rd = getServletContext().getRequestDispatcher(destination);
+				destination = "/home";
+				RequestDispatcher rd = request.getRequestDispatcher(destination);
 				rd.forward(request, response);
 			}
 		}
 		else {
-			destination = "/WEB-INF/view/homeView.jsp";
-			RequestDispatcher rd = getServletContext().getRequestDispatcher(destination);
+
+			destination = "/home";
+			RequestDispatcher rd = request.getRequestDispatcher(destination);
 			rd.forward(request, response);
 		}
 		

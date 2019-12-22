@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"%>
 <!-- Khai báo sử dụng JSTL Core Tags -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <meta charset="UTF-8">
@@ -48,35 +49,49 @@ body, html {
     <i class="fab fa-youtube w3-hover-opacity"></i>
   </div>
 </header>
-<p class="h2 text-center text-danger mt-4">Câu hỏi của tôi</p>
+<p class="h2 text-center text-danger mt-4">Hoạt động của tôi:</p>
 <div class= "container">
-	<p class="h3 text-warning">Câu hỏi đã được trả lời</p>
+	<p class="h3 text-success">Câu hỏi đã trả lời</p>
 	<ul class="list-unstyled">
-		<c:forEach items="${doneList}" var="a">
-		<li class="media border-bottom border-secondary my-3">
-			<div class="media-body">
-				<p class="h5 text-success">Hỏi:</hp>
-				<span>${a.title}</span>
-				<p>${a.question_content}</p>
-				<p class="h5 text-info">Trả lời:<p>
-				<p>${a.answer_content}</p>
-			</div>
-			
-		</li>
+		<c:forEach items="${doneList}" var="a">			
+			<li>
+				<div class="card my-2">
+				  <div class="card-header h4">
+				      ${a.title}
+				  </div>
+				  <div class="card-body">
+				    <h5 class="card-title">Hỏi:</h5>
+				    <small class="form-text text-muted">
+						<fmt:formatDate type="both"  value="${a.askdate}"/>
+				    </small>
+				    <p class="card-text">${a.question_content}</p>
+				    <h5 class="card-title">Trả lời:</h5>
+				    <small class="form-text text-muted">
+						<fmt:formatDate type="both"  value="${a.ansdate}"/>
+				    </small>
+				    <p class="card-text">${a.answer_content}</p>
+				  </div>
+				</div>				
+			<li/>
 	 	</c:forEach>
 	</ul>
 	
 	<p class="h3 text-warning mt-4">Câu hỏi chưa được trả lời</p>
 	<ul class="list-unstyled">
 		<c:forEach items="${penList}" var="a">
-		<li class="media">
-			<div class="media-body">
-				<p class="h5 text-success">Hỏi:</hp>
-				<span>${a.title}</span>
-				<p>${a.content}</p>
-			</div>
-			
-		</li>
+		<li>
+			<div class="card my-2">
+			  <div class="card-header h4">
+			      ${a.title}
+			  </div>
+			  <div class="card-body">
+			    <small class="form-text text-muted">
+					<fmt:formatDate type="both"  value="${a.created_at}"/>
+			    </small>
+			    <p class="card-text">${a.content}</p>
+			  </div>
+			</div>				
+		<li/>
 	 	</c:forEach>
 	</ul>
 

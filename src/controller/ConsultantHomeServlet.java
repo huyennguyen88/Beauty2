@@ -39,7 +39,7 @@ public class ConsultantHomeServlet extends HttpServlet {
 			destination = "/WEB-INF/view/consultantHome.jsp";
 			request.setAttribute("user", u);
 			request.setAttribute("allPen",penlist);
-			RequestDispatcher rd = getServletContext().getRequestDispatcher(destination);
+			RequestDispatcher rd = request.getRequestDispatcher(destination);
 			rd.forward(request, response);
 		}
 
@@ -47,7 +47,7 @@ public class ConsultantHomeServlet extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 		doGet(request, response);
 	}
 

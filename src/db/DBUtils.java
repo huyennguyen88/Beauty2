@@ -18,7 +18,7 @@ public class DBUtils {
 	    Connection conn = null;
 		try {
 			 Class.forName("com.mysql.cj.jdbc.Driver");
-			 String connectionURL = "jdbc:mysql://" + hostName + ":3306/" + dbName;
+			 String connectionURL = "jdbc:mysql://" + hostName + ":3306/" + dbName+"?useUnicode=yes&characterEncoding=UTF-8";
 			conn = DriverManager.getConnection(connectionURL, userName,password);
 			ps = conn.prepareStatement(sql);
 			System.out.println("ket noi thanh cong");

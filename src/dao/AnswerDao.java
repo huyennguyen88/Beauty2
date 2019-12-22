@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import beans.Answer;
 import beans.Category;
 import beans.Question;
 import beans.User;
@@ -16,29 +17,15 @@ public class AnswerDao {
 	public AnswerDao() {
 		// TODO Auto-generated constructor stub
 	}
-	public List<Question> getAnswerOfQuestion(int question_id)
-	{
-		String sql = "SELECT * FROM answer WHERE question_id = ?";
-		PreparedStatement pstmt = DBUtils.getPreparedStatement(sql);
-		List<Question> list = new ArrayList<Question>();
-		try {
-			pstmt.setInt(1, question_id);
-			ResultSet rs = pstmt.executeQuery();
-			while(rs.next()) {
-				Question n = new Question();
-				n.setQuestion_id(rs.getInt("question_id"));
-				n.setCategory_id(rs.getInt("category_id"));
-				n.setContent(rs.getString("content"));
-				n.setCreated_at(rs.getDate("created_at"));
-				n.setTitle(rs.getString("title"));
-				n.setUser_id(rs.getInt("user_id"));
-				n.setStatus(rs.getInt("status"));
-				list.add(n);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return list;
+
+	public boolean addAnswer(Answer n) throws SQLException {
+		String query = "INSERT INTO answer(content,question_id, user_id) VALUES(?,?,?)";
+		PreparedStatement pstmt = DBUtils.getPreparedStatement(query);
+		pstmt.setString(1, n.getContent());
+		pstmt.setInt(2, n.getQuestion_id());
+		pstmt.setInt(3, n.getUser_id());
+		pstmt.executeUpdate();
+		return true;
 	}
 	
 

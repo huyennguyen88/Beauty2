@@ -1,5 +1,7 @@
 package beans;
 
+import java.util.Date;
+
 public class QuestionWAnswer {
     private int question_id;
     private int answer_id;
@@ -8,6 +10,8 @@ public class QuestionWAnswer {
     private String question_content;
     private String answer_content;
     private String title;
+    private Date askdate;
+    private Date ansdate;
 	public QuestionWAnswer() {
 		// TODO Auto-generated constructor stub
 	}
@@ -32,6 +36,12 @@ public class QuestionWAnswer {
 	public void setTitle (String title ) {
 		this.title = title;
 	}
+	public void setAskdate(Date date) {
+		this.askdate = date;
+	}
+	public void setAnsDate(Date date) {
+		this.ansdate = date;
+	}
 	public int getQuestion_id() {
 		return this.question_id;
 	}
@@ -53,6 +63,11 @@ public class QuestionWAnswer {
 	public String getTitle() {
 		return this.title;
 	}
-
+	public Date getAskdate() {
+		return this.askdate;
+	}
+	public Date getAnsdate() {
+		return this.ansdate;
+	}
 
 }

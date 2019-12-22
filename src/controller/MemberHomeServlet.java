@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.User;
+import bo.QuestionWAnswerBo;
 import beans.Question;
 import beans.QuestionWAnswer;
 import dao.QuestionWAnswerDao;
@@ -20,10 +21,10 @@ import dao.QuestionWAnswerDao;
 @WebServlet("/member_home")
 public class MemberHomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    QuestionWAnswerDao qd;
+    QuestionWAnswerBo qd;
     public MemberHomeServlet() {
         super();
-        qd = new QuestionWAnswerDao();
+        qd = new QuestionWAnswerBo();
 
     }
 
@@ -45,7 +46,7 @@ public class MemberHomeServlet extends HttpServlet {
 			request.setAttribute("penList", penlist);
 			request.setAttribute("doneList", donelist);
 			
-			RequestDispatcher rd = getServletContext().getRequestDispatcher(destination);
+			RequestDispatcher rd = request.getRequestDispatcher(destination);
 			rd.forward(request, response);
 		}
 

@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"%>
 <!-- Khai báo sử dụng JSTL Core Tags -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <meta charset="UTF-8">
@@ -54,13 +55,14 @@ body, html {
     <i class="fab fa-youtube w3-hover-opacity"></i>
   </div>
 </header>
-<p class="h2 text-danger text-center my-3">Câu hỏi chưa giải đáp:</p>
+<p class="h2 text-danger text-center mt-4">Câu hỏi cần giải đáp:</p>
 <div class="container">
 <table class="table table-hover">
   <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Tiêu đề</th>
+      <th scope="col">Ngày gửi</th>
       <th scope="col">Nội dung</th>
       <th scope="col">Trả lời</th>
     </tr>
@@ -69,12 +71,15 @@ body, html {
    <c:set var="count" value="0" scope="page" />
    <c:forEach items="${allPen}" var="question">
 	<c:set var="count" value="${count + 1}" scope="page"/>
-    <tr>
+    <tr  >
       <th scope="row"><c:out value="${count}"></c:out> </th>
-      <td>${question.title}</td>
+      <td style="display:none;" >${question.question_id}</td>
+      <td >${question.title}</td>
+      <td style="pading: 0 30px;"><fmt:formatDate type="date" dateStyle="short"  value="${question.created_at}"/></td>
       <td>${question.content}</td>
+      
       <td>
-      	<button type="button" type="button" class="btn btn-success" data-toggle="modal" data-target="#ansform">Answer</button>
+      	<button onclick="getQuestion(${question.question_id})"  type="button" class="btn btn-success" data-toggle="modal" data-target="#ansform">Answer</button>
       </td>
     </tr>   		
    </c:forEach>
@@ -94,14 +99,10 @@ body, html {
                    </div>
                    <div class="modal-body">
                        <form action="<%=request.getContextPath()%>/ansform" method="POST">
-                           <div class="form-group">
-                               <label  class="text-danger">Tiêu đề  </label>
-                               <input name="title" type="text" class="form-control" placeholder="Tiêu đề là..."  />
-                           </div>  
-                        
+                       	   <input style="display:none;" id="question_id" name="question_id">
                            <div class="form-group">
                                <label>Trả lời</label>
-                               <textarea class="form-control"  rows="3" name="content"></textarea>
+                               <textarea class="form-control"  rows="3" name="content" ></textarea>
                            </div>
                        	   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                            <input  type="submit" class="btn btn-danger" value="Submit"/>
@@ -111,7 +112,15 @@ body, html {
            </div>
        </div>
    </div>
+ <div class="w3-container" style="padding:100px 16px" >
+</div> 
 <jsp:include page="_footer.jsp"></jsp:include>
+<script >
+	function getQuestion(i){
+		var inputQueId = document.getElementById("question_id");
+		inputQueId.value = i;
+	}
+</script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>

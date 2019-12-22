@@ -24,7 +24,8 @@ public class HomeServlet extends HttpServlet {
         cd = new CategoryDao();
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		response.setContentType("text/html;charset=UTF-8");
+		request.setCharacterEncoding("utf-8");
 		 HttpSession ses = request.getSession();
 		 User u =(User) ses.getAttribute("user");
 		 if(u!=null) {
